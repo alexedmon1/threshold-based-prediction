@@ -95,31 +95,7 @@ Core dependencies include:
 
 ## Quick Start
 
-### Example 1: Human FreeSurfer Data
-
-```python
-from threshold_prediction.data.pipeline_factory import DataPipelineFactory
-from threshold_prediction.models.threshold_analyzer import ThresholdAnalyzer
-
-# Prepare data from FreeSurfer
-pipeline = DataPipelineFactory.from_config_file("config_human.yaml")
-data = pipeline.run(output_path="human_data.csv")
-
-# Run threshold analysis
-analyzer = ThresholdAnalyzer.from_config_file("analysis_config.yaml")
-analyzer.load_data("human_data.csv")
-results = analyzer.scan_thresholds(
-    target_variable="exposure_dose",
-    threshold_range=(0.0, 2.0),
-    threshold_step=0.1
-)
-
-# Generate report
-analyzer.plot_results(output_dir="results/")
-analyzer.export_results("results/analysis_results.csv")
-```
-
-### Example 2: Animal Label Map Data
+### Example 1: Command-Line Interface
 
 ```yaml
 # config_animal.yaml
@@ -150,6 +126,30 @@ standardization:
 # Run from command line
 neurothreshold prepare --config config_animal.yaml --output rat_data.csv
 neurothreshold analyze --data rat_data.csv --target exposure_dose --config analysis_config.yaml
+```
+
+### Example 2: Python API
+
+```python
+from threshold_prediction.data.pipeline_factory import DataPipelineFactory
+from threshold_prediction.models.threshold_analyzer import ThresholdAnalyzer
+
+# Prepare data from FreeSurfer
+pipeline = DataPipelineFactory.from_config_file("config_human.yaml")
+data = pipeline.run(output_path="human_data.csv")
+
+# Run threshold analysis
+analyzer = ThresholdAnalyzer.from_config_file("analysis_config.yaml")
+analyzer.load_data("human_data.csv")
+results = analyzer.scan_thresholds(
+    target_variable="exposure_dose",
+    threshold_range=(0.0, 2.0),
+    threshold_step=0.1
+)
+
+# Generate report
+analyzer.plot_results(output_dir="results/")
+analyzer.export_results("results/analysis_results.csv")
 ```
 
 ### Example 3: Direct CSV Input
