@@ -99,7 +99,7 @@ python generate_synthetic_sigma.py
 ### Step 2: Prepare Data
 
 ```bash
-threshold-predict prepare \
+neurothreshold prepare \
     --config sigma_example_config.yaml \
     --output sigma_example_data.csv
 ```
@@ -107,7 +107,7 @@ threshold-predict prepare \
 ### Step 3: Run Threshold Analysis
 
 ```bash
-threshold-predict analyze \
+neurothreshold analyze \
     --data sigma_example_data.csv \
     --target exposure_dose \
     --threshold-min 0 \

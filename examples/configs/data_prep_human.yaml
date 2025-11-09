@@ -1,7 +1,7 @@
 # Configuration for Human Neuroimaging Data (FreeSurfer)
 #
 # This configuration prepares data from FreeSurfer outputs for threshold analysis.
-# Use with: threshold-predict prepare --config data_prep_human.yaml --output human_data.csv
+# Use with: neurothreshold prepare --config data_prep_human.yaml --output human_data.csv
 
 pipeline:
   type: "human"

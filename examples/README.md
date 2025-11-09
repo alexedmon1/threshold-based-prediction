@@ -21,12 +21,12 @@ examples/
 
 ```bash
 # Prepare data from FreeSurfer outputs
-threshold-predict prepare \
+neurothreshold prepare \
     --config examples/configs/data_prep_human.yaml \
     --output human_data.csv
 
 # Run threshold analysis
-threshold-predict analyze \
+neurothreshold analyze \
     --data human_data.csv \
     --target mn_twa \
     --threshold-min 0 \
@@ -39,12 +39,12 @@ threshold-predict analyze \
 
 ```bash
 # Prepare data from rat MRI with SIGMA atlas
-threshold-predict prepare \
+neurothreshold prepare \
     --config examples/configs/data_prep_animal_rat.yaml \
     --output rat_data.csv
 
 # Run analysis
-threshold-predict analyze \
+neurothreshold analyze \
     --data rat_data.csv \
     --target mn_dose \
     --threshold-min 0 \
@@ -58,12 +58,12 @@ threshold-predict analyze \
 
 ```bash
 # Prepare from CSV (minimal processing)
-threshold-predict prepare \
+neurothreshold prepare \
     --config examples/configs/data_prep_csv.yaml \
     --output prepared_data.csv
 
 # Run analysis
-threshold-predict analyze \
+neurothreshold analyze \
     --data prepared_data.csv \
     --target dose_mg_kg \
     --threshold-min 0 \
@@ -180,10 +180,10 @@ Test your configuration before running full analysis:
 
 ```bash
 # Validate data quality
-threshold-predict validate --data prepared_data.csv
+neurothreshold validate --data prepared_data.csv
 
 # Check configuration syntax (will fail gracefully if invalid)
-threshold-predict prepare --config your_config.yaml --output test.csv
+neurothreshold prepare --config your_config.yaml --output test.csv
 ```
 
 ## Next Steps

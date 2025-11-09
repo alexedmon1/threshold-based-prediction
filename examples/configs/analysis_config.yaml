@@ -1,7 +1,7 @@
 # Configuration for Threshold-Based SVM Analysis
 #
 # This configuration controls the threshold scanning and SVM classification.
-# Use with: threshold-predict analyze --data prepared_data.csv --config analysis_config.yaml
+# Use with: neurothreshold analyze --data prepared_data.csv --config analysis_config.yaml
 
 data:
   input: "prepared_data.csv"

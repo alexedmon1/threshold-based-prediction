@@ -1,7 +1,7 @@
 [project]
-name = "threshold-prediction"
+name = "neurothreshold"
 version = "0.1.0"
-description = "Threshold-based prediction of toxicological exposure using neuroimaging and machine learning"
+description = "Neuroimaging-based threshold prediction for toxicological exposure assessment using machine learning"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
@@ -48,13 +48,13 @@ dev = [
 ]
 
 [project.scripts]
-threshold-predict = "threshold_prediction.cli:main"
+neurothreshold = "threshold_prediction.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/threshold-prediction"
-Documentation = "https://threshold-prediction.readthedocs.io"
-Repository = "https://github.com/yourusername/threshold-prediction"
-Issues = "https://github.com/yourusername/threshold-prediction/issues"
+Homepage = "https://github.com/yourusername/neurothreshold"
+Documentation = "https://neurothreshold.readthedocs.io"
+Repository = "https://github.com/yourusername/neurothreshold"
+Issues = "https://github.com/yourusername/neurothreshold/issues"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]

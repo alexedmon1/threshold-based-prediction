@@ -71,7 +71,7 @@ python generate_synthetic_freesurfer.py
 ### Step 2: Prepare Data
 
 ```bash
-threshold-predict prepare \
+neurothreshold prepare \
     --config freesurfer_example_config.yaml \
     --output freesurfer_example_data.csv
 ```
@@ -79,7 +79,7 @@ threshold-predict prepare \
 ### Step 3: Run Threshold Analysis
 
 ```bash
-threshold-predict analyze \
+neurothreshold analyze \
     --data freesurfer_example_data.csv \
     --target exposure_dose \
     --threshold-min 0.0 \

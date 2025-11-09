@@ -1,4 +1,4 @@
-# Threshold-Based Prediction of Toxicological Exposure
+# NeuroThreshold
 
 A Python package for identifying toxicological thresholds using neuroimaging biomarkers and machine learning.
 
@@ -148,8 +148,8 @@ standardization:
 
 ```bash
 # Run from command line
-threshold-predict prepare --config config_animal.yaml --output rat_data.csv
-threshold-predict analyze --data rat_data.csv --target mn_dose --config analysis_config.yaml
+neurothreshold prepare --config config_animal.yaml --output rat_data.csv
+neurothreshold analyze --data rat_data.csv --target mn_dose --config analysis_config.yaml
 ```
 
 ### Example 3: Direct CSV Input

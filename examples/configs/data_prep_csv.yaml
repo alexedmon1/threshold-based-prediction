@@ -7,7 +7,7 @@
 # - Pre-processed data from other tools
 #
 # See docs/csv_data_format.md for required format
-# Use with: threshold-predict prepare --config data_prep_csv.yaml --output analysis_data.csv
+# Use with: neurothreshold prepare --config data_prep_csv.yaml --output analysis_data.csv
 
 pipeline:
   type: "csv"

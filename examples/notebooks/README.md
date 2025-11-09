@@ -113,7 +113,7 @@ These are created in the respective example directories and can be safely delete
 
 **Kernel Issues**: If the kernel doesn't start, ensure you're using the correct Python environment:
 ```bash
-python -m ipykernel install --user --name=threshold-prediction
+python -m ipykernel install --user --name=neurothresholdion
 ```
 
 **Import Errors**: If modules aren't found, install the package in editable mode:

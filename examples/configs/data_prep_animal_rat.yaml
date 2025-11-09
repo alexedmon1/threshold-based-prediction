@@ -2,7 +2,7 @@
 #
 # This configuration extracts ROI statistics from rat brain images using
 # the SIGMA atlas (Scalable multimodal atlas for rat brain).
-# Use with: threshold-predict prepare --config data_prep_animal_rat.yaml --output rat_data.csv
+# Use with: neurothreshold prepare --config data_prep_animal_rat.yaml --output rat_data.csv
 
 pipeline:
   type: "animal"

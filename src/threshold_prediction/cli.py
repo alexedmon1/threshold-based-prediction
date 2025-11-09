@@ -18,9 +18,9 @@ from threshold_prediction import __version__
 @click.version_option(version=__version__)
 def main():
     """
-    Threshold-Based Prediction of Toxicological Exposure.
+    NeuroThreshold - Neuroimaging-based Threshold Prediction.
 
-    For detailed help: threshold-predict COMMAND --help
+    For detailed help: neurothreshold COMMAND --help
     """
     pass
 
