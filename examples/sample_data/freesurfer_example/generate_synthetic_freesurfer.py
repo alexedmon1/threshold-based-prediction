@@ -175,22 +175,22 @@ def generate_metadata(n_subjects: int, output_dir: Path):
         ["high"] * (n_subjects - 3 * n_per_group)
     )
 
-    # Manganese time-weighted average (µg/m³)
-    mn_twa_ranges = {
+    # Exposure dose (arbitrary units)
+    dose_ranges = {
         "control": (0.01, 0.05),
         "low": (0.2, 0.6),
         "medium": (0.7, 1.3),
         "high": (1.4, 2.2)
     }
 
-    mn_twa = [np.random.uniform(*mn_twa_ranges[group]) for group in exposure_groups]
+    exposure_dose = [np.random.uniform(*dose_ranges[group]) for group in exposure_groups]
 
     # Normalized exposure (0-1 scale for synthesis)
-    exposure_normalized = [(val - 0.01) / (2.2 - 0.01) for val in mn_twa]
+    exposure_normalized = [(val - 0.01) / (2.2 - 0.01) for val in exposure_dose]
 
     # Age and other demographics
     age = np.random.randint(30, 65, n_subjects)
-    years_welding = [
+    years_exposure = [
         np.random.uniform(0, 2) if g == "control" else
         np.random.uniform(3, 8) if g == "low" else
         np.random.uniform(9, 15) if g == "medium" else
@@ -201,9 +201,9 @@ def generate_metadata(n_subjects: int, output_dir: Path):
     metadata = pd.DataFrame({
         "subject_id": subjects,
         "exposure_group": exposure_groups,
-        "mn_twa": mn_twa,
+        "exposure_dose": exposure_dose,
         "age": age,
-        "total_welding_years": years_welding,
+        "years_exposure": years_exposure,
         "exposure_normalized": exposure_normalized  # For synthesis only
     })
 

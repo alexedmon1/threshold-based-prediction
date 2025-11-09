@@ -23,7 +23,7 @@ standardization:
   metadata: ./sigma_example_metadata.csv
   subject_id_column: rat_id
   target_variables:
-  - mn_dose
+  - exposure_dose
   - exposure_group
   - exposure_duration_days
 validation:

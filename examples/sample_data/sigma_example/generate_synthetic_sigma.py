@@ -3,7 +3,7 @@
 Generate synthetic rat brain MRI data with SIGMA atlas for testing and demonstration.
 
 This script creates realistic NIfTI images (R1, R2*) and a simplified SIGMA-like atlas
-for a cohort of synthetic rats with varying manganese exposure levels.
+for a cohort of synthetic rats with varying exposure levels.
 """
 
 import os
@@ -16,11 +16,11 @@ from pathlib import Path
 # Simplified SIGMA atlas regions (subset of full 156 regions)
 # Label ID: (Region Name, Baseline R1 ms, Baseline R2* ms)
 SIGMA_REGIONS = {
-    1: ("Caud_Put_left", 1450, 25),      # Caudate-Putamen (very sensitive to Mn)
+    1: ("Caud_Put_left", 1450, 25),      # Caudate-Putamen (highly affected)
     2: ("Caud_Put_right", 1450, 25),
-    3: ("Glob_Pall_left", 1380, 22),     # Globus Pallidus (very sensitive to Mn)
+    3: ("Glob_Pall_left", 1380, 22),     # Globus Pallidus (highly affected)
     4: ("Glob_Pall_right", 1380, 22),
-    5: ("Thalamus_left", 1420, 24),      # Thalamus (moderately sensitive)
+    5: ("Thalamus_left", 1420, 24),      # Thalamus (moderately affected)
     6: ("Thalamus_right", 1420, 24),
     7: ("Hippocampus_left", 1580, 28),   # Hippocampus
     8: ("Hippocampus_right", 1580, 28),
@@ -28,7 +28,7 @@ SIGMA_REGIONS = {
     10: ("Cortex_M1_right", 1650, 30),
     11: ("Cortex_S1_left", 1680, 31),    # Somatosensory cortex
     12: ("Cortex_S1_right", 1680, 31),
-    13: ("Substantia_Nigra_left", 1200, 18),   # Substantia Nigra (very sensitive)
+    13: ("Substantia_Nigra_left", 1200, 18),   # Substantia Nigra (highly affected)
     14: ("Substantia_Nigra_right", 1200, 18),
     15: ("Cerebellum_left", 1550, 27),   # Cerebellum
     16: ("Cerebellum_right", 1550, 27),
@@ -119,13 +119,13 @@ def generate_rat_images(rat_id: str, exposure_level: float, atlas_data, output_d
     """
     Generate R1 and R2* maps for a single rat.
 
-    Manganese exposure increases R1 (brightening on T1) and decreases R2* in basal ganglia.
+    Exposure increases R1 (brightening on T1) and decreases R2* in basal ganglia.
     """
     rat_dir = output_dir / rat_id
     rat_dir.mkdir(parents=True, exist_ok=True)
 
     # Exposure effects (dose-dependent):
-    # - Mn accumulates primarily in basal ganglia (caudate-putamen, globus pallidus, substantia nigra)
+    # - Effects concentrated in basal ganglia (caudate-putamen, globus pallidus, substantia nigra)
     # - Increases R1 relaxation rate (decreases T1, appears bright on T1-weighted)
     # - Decreases R2* (increases susceptibility effects)
 
@@ -141,17 +141,17 @@ def generate_rat_images(rat_id: str, exposure_level: float, atlas_data, output_d
             r2star_values[0] = 0
             continue
 
-        # Determine sensitivity to Mn based on region
+        # Determine regional sensitivity based on region
         if "Caud_Put" in region_name or "Glob_Pall" in region_name or "Substantia_Nigra" in region_name:
-            # Highly sensitive regions
+            # Highly affected regions
             r1_change = exposure_level * 0.35  # Up to 35% increase
             r2star_change = exposure_level * -0.30  # Up to 30% decrease
         elif "Thalamus" in region_name:
-            # Moderately sensitive
+            # Moderately affected
             r1_change = exposure_level * 0.15
             r2star_change = exposure_level * -0.12
         else:
-            # Less sensitive regions
+            # Less affected regions
             r1_change = exposure_level * 0.05
             r2star_change = exposure_level * -0.04
 
@@ -173,7 +173,7 @@ def generate_rat_images(rat_id: str, exposure_level: float, atlas_data, output_d
 
 
 def generate_metadata(n_rats: int, output_dir: Path):
-    """Generate metadata CSV with manganese exposure information."""
+    """Generate metadata CSV with exposure information."""
     np.random.seed(123)  # Different seed than FreeSurfer example
 
     rats = [f"rat_{i:03d}" for i in range(1, n_rats + 1)]
@@ -188,22 +188,22 @@ def generate_metadata(n_rats: int, output_dir: Path):
         ["high"] * (n_rats - 3 * n_per_group)
     )
 
-    # Manganese dose (mg/kg body weight)
-    mn_dose_ranges = {
+    # Exposure dose (arbitrary units)
+    dose_ranges = {
         "control": (0, 0),
         "low": (5, 15),
         "medium": (20, 35),
         "high": (40, 60)
     }
 
-    mn_dose = [
-        np.random.uniform(*mn_dose_ranges[group]) if group != "control"
+    exposure_dose = [
+        np.random.uniform(*dose_ranges[group]) if group != "control"
         else 0
         for group in exposure_groups
     ]
 
     # Normalized exposure (0-1 scale for synthesis)
-    exposure_normalized = [dose / 60.0 for dose in mn_dose]
+    exposure_normalized = [dose / 60.0 for dose in exposure_dose]
 
     # Other variables
     age_days = np.random.randint(60, 120, n_rats)
@@ -218,7 +218,7 @@ def generate_metadata(n_rats: int, output_dir: Path):
     metadata = pd.DataFrame({
         "rat_id": rats,
         "exposure_group": exposure_groups,
-        "mn_dose": mn_dose,
+        "exposure_dose": exposure_dose,
         "age_days": age_days,
         "weight_g": weight_g,
         "exposure_duration_days": exposure_duration_days,

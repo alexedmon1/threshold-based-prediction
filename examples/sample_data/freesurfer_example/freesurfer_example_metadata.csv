@@ -1,4 +1,4 @@
-subject_id,exposure_group,mn_twa,age,total_welding_years,exposure_normalized
+subject_id,exposure_group,exposure_dose,age,years_exposure,exposure_normalized
 subject_001,control,0.0249816047538945,57,0.7821212151464816,0.006840915412737213
 subject_002,control,0.04802857225639665,45,0.36447217557612466,0.01736464486593454
 subject_003,control,0.03927975767245621,44,1.510722820635305,0.013369752361852146

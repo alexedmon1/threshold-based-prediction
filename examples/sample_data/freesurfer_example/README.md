@@ -7,11 +7,11 @@ This directory contains a complete synthetic example demonstrating the threshold
 **Synthetic Study Design:**
 - 20 synthetic subjects with FreeSurfer-processed brain MRI data
 - 4 exposure groups: control, low, medium, high
-- Exposure variable: Manganese time-weighted average (mn_twa) in µg/m³
-- Range: 0.01 to 2.2 µg/m³
+- Exposure variable: exposure_dose (arbitrary units)
+- Range: 0.01 to 2.2
 
 **Synthetic neurological effects:**
-- Higher manganese exposure is associated with reduced volumes in basal ganglia structures (caudate, putamen, pallidum, thalamus)
+- Higher exposure is associated with reduced volumes in basal ganglia structures (caudate, putamen, pallidum, thalamus)
 - Effects are progressive with exposure level
 - Cortical thickness and volume also show dose-dependent reductions
 
@@ -21,7 +21,7 @@ This directory contains a complete synthetic example demonstrating the threshold
 
 1. **`freesurfer_example_metadata.csv`**
    - Subject demographics and exposure data
-   - Columns: subject_id, exposure_group, mn_twa, age, total_welding_years
+   - Columns: subject_id, exposure_group, exposure_dose, age, years_exposure
 
 2. **`subjects/`**
    - Synthetic FreeSurfer stats files for 20 subjects
@@ -51,13 +51,13 @@ This directory contains a complete synthetic example demonstrating the threshold
 
 ## Key Results
 
-**Optimal Threshold: 0.6 µg/m³**
+**Optimal Threshold: 0.6**
 - Classification accuracy: 95.0%
 - Balanced groups: 10 low-exposure vs 10 high-exposure
 - PCA components: 15 (explaining 90.2% variance)
 
 **Interpretation:**
-The synthetic data demonstrates that brain imaging patterns can successfully distinguish between subjects with manganese exposure below vs above 0.6 µg/m³, suggesting this as a potential threshold for detecting neurological changes.
+The synthetic data demonstrates that brain imaging patterns can successfully distinguish between subjects with exposure below vs above 0.6, suggesting this as a potential threshold for detecting neurological changes.
 
 ## Reproducing This Example
 
@@ -81,7 +81,7 @@ threshold-predict prepare \
 ```bash
 threshold-predict analyze \
     --data freesurfer_example_data.csv \
-    --target mn_twa \
+    --target exposure_dose \
     --threshold-min 0.0 \
     --threshold-max 2.0 \
     --threshold-step 0.2 \
@@ -104,7 +104,7 @@ data = pipeline.run(output_path="freesurfer_example_data.csv")
 analyzer = ThresholdAnalyzer()
 analyzer.load_data("freesurfer_example_data.csv")
 results = analyzer.scan_thresholds(
-    target_variable="mn_twa",
+    target_variable="exposure_dose",
     threshold_range=(0.0, 2.0),
     threshold_step=0.2
 )
@@ -113,13 +113,13 @@ results = analyzer.scan_thresholds(
 evaluator = ResultsEvaluator(analyzer.results)
 visualizer = ResultsVisualizer(analyzer.results)
 report_gen = HTMLReportGenerator(evaluator, visualizer)
-report_gen.generate_html_report("freesurfer_example_report.html", target_variable="mn_twa")
+report_gen.generate_html_report("freesurfer_example_report.html", target_variable="exposure_dose")
 ```
 
 ## Notes
 
 - This is **synthetic data** generated for demonstration purposes only
-- The exposure-brain relationship is simulated based on known neurotoxicological effects
+- The exposure-brain relationship is simulated based on known neurotoxicological patterns
 - Real-world data would show more variability and confounding factors
 - The high accuracy (95%) reflects the clean synthetic data generation
 

@@ -1,4 +1,4 @@
-rat_id,exposure_group,mn_dose,age_days,weight_g,exposure_duration_days,exposure_normalized
+rat_id,exposure_group,exposure_dose,age_days,weight_g,exposure_duration_days,exposure_normalized
 rat_001,control,0.0,64,286.1788655622314,0,0.0
 rat_002,control,0.0,109,272.82632308789556,0,0.0
 rat_003,control,0.0,115,279.37140463888295,0,0.0

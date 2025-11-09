@@ -7,18 +7,18 @@ This directory contains a complete synthetic example demonstrating the threshold
 **Synthetic Study Design:**
 - 20 synthetic rats with brain MRI data (R1 and R2* maps)
 - 4 exposure groups: control, low, medium, high
-- Exposure variable: Manganese dose (mn_dose) in mg/kg body weight
-- Range: 0 to 60 mg/kg
+- Exposure variable: exposure_dose (arbitrary units)
+- Range: 0 to 60
 
 **Synthetic neurological effects:**
-- Manganese accumulates primarily in basal ganglia (caudate-putamen, globus pallidus, substantia nigra)
+- Exposure effects concentrated in basal ganglia (caudate-putamen, globus pallidus, substantia nigra)
 - Increases R1 relaxation rate (appears bright on T1-weighted MRI)
 - Decreases R2* (increased susceptibility effects)
 - Effects are dose-dependent and region-specific
 
 **MRI Modalities:**
-- **R1 maps**: Longitudinal relaxation rate (1/T1), sensitive to manganese accumulation
-- **R2* maps**: Effective transverse relaxation rate, sensitive to iron and manganese
+- **R1 maps**: Longitudinal relaxation rate (1/T1), sensitive to certain contrast agents and pathologies
+- **R2* maps**: Effective transverse relaxation rate, sensitive to iron and other paramagnetic substances
 
 ## Files in This Example
 
@@ -26,7 +26,7 @@ This directory contains a complete synthetic example demonstrating the threshold
 
 1. **`sigma_example_metadata.csv`**
    - Rat demographics and exposure data
-   - Columns: rat_id, exposure_group, mn_dose, age_days, weight_g, exposure_duration_days
+   - Columns: rat_id, exposure_group, exposure_dose, age_days, weight_g, exposure_duration_days
 
 2. **`sigma_atlas.nii.gz`**
    - Simplified SIGMA-like atlas (16 bilateral brain regions)
@@ -48,11 +48,11 @@ This directory contains a complete synthetic example demonstrating the threshold
 
 ### Brain Regions in Simplified Atlas
 
-- **Basal Ganglia** (highly sensitive to Mn):
+- **Basal Ganglia** (highly affected by exposure):
   - Caudate-Putamen (striatum)
   - Globus Pallidus
   - Substantia Nigra
-- **Thalamus** (moderately sensitive)
+- **Thalamus** (moderately affected)
 - **Hippocampus**
 - **Cortex**:
   - Motor cortex (M1)
@@ -78,14 +78,14 @@ This directory contains a complete synthetic example demonstrating the threshold
 
 ## Key Results
 
-**Optimal Threshold: 20.0 mg/kg**
+**Optimal Threshold: 20.0**
 - Classification accuracy: 100.0%
 - Balanced groups: 10 low-dose vs 10 high-dose
 - PCA components: 11 (explaining 90.9% variance)
-- Alternative threshold: 30.0 mg/kg also achieved 100% accuracy
+- Alternative threshold: 30.0 also achieved 100% accuracy
 
 **Interpretation:**
-The synthetic data demonstrates perfect separation of rats based on brain MRI patterns at a manganese dose threshold of 20 mg/kg. This represents the boundary between low/medium exposure groups and suggests this as a critical dose for detecting neurological changes in the basal ganglia.
+The synthetic data demonstrates perfect separation of rats based on brain MRI patterns at an exposure threshold of 20. This represents the boundary between low/medium exposure groups and suggests this as a critical dose for detecting neurological changes in the basal ganglia.
 
 ## Reproducing This Example
 
@@ -109,7 +109,7 @@ threshold-predict prepare \
 ```bash
 threshold-predict analyze \
     --data sigma_example_data.csv \
-    --target mn_dose \
+    --target exposure_dose \
     --threshold-min 0 \
     --threshold-max 60 \
     --threshold-step 10 \
@@ -132,7 +132,7 @@ data = pipeline.run(output_path="sigma_example_data.csv")
 analyzer = ThresholdAnalyzer()
 analyzer.load_data("sigma_example_data.csv")
 results = analyzer.scan_thresholds(
-    target_variable="mn_dose",
+    target_variable="exposure_dose",
     threshold_range=(0, 60),
     threshold_step=10
 )
@@ -141,7 +141,7 @@ results = analyzer.scan_thresholds(
 evaluator = ResultsEvaluator(analyzer.results)
 visualizer = ResultsVisualizer(analyzer.results)
 report_gen = HTMLReportGenerator(evaluator, visualizer)
-report_gen.generate_html_report("sigma_example_report.html", target_variable="mn_dose")
+report_gen.generate_html_report("sigma_example_report.html", target_variable="exposure_dose")
 ```
 
 ## Comparing with FreeSurfer Example
@@ -153,8 +153,8 @@ report_gen.generate_html_report("sigma_example_report.html", target_variable="mn
 | **Atlas** | FreeSurfer aseg + aparc | SIGMA-like label map |
 | **Regions** | ~100 cortical/subcortical | 16 bilateral regions |
 | **Features** | 100 (volumes, thickness, area) | 134 (multi-modal statistics) |
-| **Exposure metric** | Air Mn concentration (µg/m³) | Administered dose (mg/kg) |
-| **Best threshold** | 0.6 µg/m³ | 20 mg/kg |
+| **Exposure metric** | Arbitrary units (0.01-2.2) | Arbitrary units (0-60) |
+| **Best threshold** | 0.6 | 20.0 |
 | **Best accuracy** | 95% | 100% |
 
 ## Notes
@@ -162,7 +162,7 @@ report_gen.generate_html_report("sigma_example_report.html", target_variable="mn
 - This is **synthetic data** generated for demonstration purposes only
 - The simplified SIGMA atlas has 16 regions (vs 156 in full SIGMA atlas)
 - Real SIGMA atlas available at: https://www.nitrc.org/projects/sigma_template
-- The dose-effect relationship is simulated based on published literature
+- The dose-effect relationship is simulated based on published neurotoxicology literature
 - Perfect accuracy (100%) reflects clean synthetic data with clear group separation
 - Real-world animal data would show more biological variability
 

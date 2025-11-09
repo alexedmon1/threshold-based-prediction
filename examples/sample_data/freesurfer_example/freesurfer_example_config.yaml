@@ -37,9 +37,9 @@ standardization:
   metadata: ./freesurfer_example_metadata.csv
   subject_id_column: subject_id
   target_variables:
-  - mn_twa
+  - exposure_dose
   - exposure_group
-  - total_welding_years
+  - years_exposure
 validation:
   check_missing: true
   missing_threshold: 0.1
