@@ -1,0 +1,33 @@
+# SIGMA Example Configuration
+#
+# This configuration prepares synthetic rat brain MRI data using SIGMA atlas.
+# This is a working example demonstrating the animal pipeline.
+
+pipeline:
+  type: animal
+  species: rat
+animal:
+  atlas:
+    type: labelmap
+    path: ./sigma_atlas.nii.gz
+    labels_csv: ./sigma_labels.csv
+  images:
+    r1_pattern: rats/*/R1_registered.nii.gz
+    r2star_pattern: rats/*/R2star_registered.nii.gz
+  statistics:
+  - mean
+  - median
+  - std
+  - variance
+standardization:
+  metadata: ./sigma_example_metadata.csv
+  subject_id_column: rat_id
+  target_variables:
+  - mn_dose
+  - exposure_group
+  - exposure_duration_days
+validation:
+  check_missing: true
+  missing_threshold: 0.1
+  check_outliers: true
+  outlier_std: 3.0

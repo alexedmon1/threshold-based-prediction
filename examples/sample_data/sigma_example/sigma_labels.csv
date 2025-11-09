@@ -1,0 +1,17 @@
+label_id,region_name,hemisphere
+1,Caud_Put_left,left
+2,Caud_Put_right,right
+3,Glob_Pall_left,left
+4,Glob_Pall_right,right
+5,Thalamus_left,left
+6,Thalamus_right,right
+7,Hippocampus_left,left
+8,Hippocampus_right,right
+9,Cortex_M1_left,left
+10,Cortex_M1_right,right
+11,Cortex_S1_left,left
+12,Cortex_S1_right,right
+13,Substantia_Nigra_left,left
+14,Substantia_Nigra_right,right
+15,Cerebellum_left,left
+16,Cerebellum_right,right

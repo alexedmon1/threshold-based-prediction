@@ -1,0 +1,47 @@
+# FreeSurfer Example Configuration
+#
+# This configuration prepares synthetic FreeSurfer data for threshold analysis.
+# This is a working example demonstrating the complete pipeline.
+
+pipeline:
+  type: human
+human:
+  subjects_dir: ./subjects
+  subjects_list:
+  - subject_001
+  - subject_002
+  - subject_003
+  - subject_004
+  - subject_005
+  - subject_006
+  - subject_007
+  - subject_008
+  - subject_009
+  - subject_010
+  - subject_011
+  - subject_012
+  - subject_013
+  - subject_014
+  - subject_015
+  - subject_016
+  - subject_017
+  - subject_018
+  - subject_019
+  - subject_020
+  measures:
+  - volume
+  atlases:
+  - aseg
+  - aparc
+standardization:
+  metadata: ./freesurfer_example_metadata.csv
+  subject_id_column: subject_id
+  target_variables:
+  - mn_twa
+  - exposure_group
+  - total_welding_years
+validation:
+  check_missing: true
+  missing_threshold: 0.1
+  check_outliers: true
+  outlier_std: 3.0

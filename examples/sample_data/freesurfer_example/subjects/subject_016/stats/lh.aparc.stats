@@ -1,0 +1,39 @@
+# Table of FreeSurfer cortical parcellation anatomical statistics
+# hemi lh
+# subject subject_016
+#
+# ColHeaders StructName NumVert SurfArea GrayVol ThickAvg ThickStd MeanCurv GausCurv FoldInd CurvInd
+bankssts                              1730    1212    3423  2.302 0.343 0.13857 0.05846     20    1.2
+caudalanteriorcingulate               1546    1082    3135  2.647 0.554 0.13998 0.05000     27    1.4
+caudalmiddlefrontal                   4956    3469    7167  2.306 0.420 0.15870 0.04977     43    1.4
+cuneus                                2319    1624    3911  1.719 0.469 0.17702 0.03362     22    0.8
+entorhinal                             592     415    1243  3.166 0.493 0.15218 0.04374     29    1.6
+fusiform                              6341    4439   11659  2.476 0.524 0.17082 0.04882     22    1.8
+inferiorparietal                     10965    7676   19167  2.643 0.498 0.16401 0.04943     27    0.7
+inferiortemporal                      7290    5103   12013  2.826 0.403 0.12924 0.04326     20    1.4
+isthmuscingulate                      1469    1029    2291  2.612 0.480 0.13704 0.07403     23    0.9
+lateraloccipital                      8985    6290   14185  2.015 0.350 0.14548 0.05305     11    0.5
+lateralorbitofrontal                  4994    3496    9862  2.560 0.354 0.12620 0.03260     27    1.4
+lingual                               5839    4087    6621  2.190 0.439 0.17462 0.04634     30    1.9
+medialorbitofrontal                   3925    2748    5272  2.493 0.424 0.12494 0.06033     14    1.8
+middletemporal                        6857    4800   10720  2.915 0.308 0.16780 0.06001     38    1.0
+parahippocampal                       1533    1074    2467  2.554 0.480 0.16738 0.04076     13    1.3
+paracentral                           3447    2413    5438  2.106 0.565 0.15837 0.03336     20    1.7
+parsopercularis                       3369    2359    5907  2.266 0.399 0.13934 0.05789     44    0.8
+parsorbitalis                         1570    1100    3196  2.798 0.327 0.12759 0.07133     45    1.2
+parstriangularis                      3010    2107    3284  2.481 0.472 0.17121 0.04991     22    1.7
+pericalcarine                         2146    1502    3157  1.480 0.478 0.16917 0.07127     13    0.8
+postcentral                           8059    5641   11415  1.846 0.487 0.14968 0.04056     25    1.3
+posteriorcingulate                    2127    1489    4395  2.436 0.322 0.14269 0.06550     11    1.4
+precentral                            8596    6018   13867  2.329 0.582 0.15127 0.07986     31    1.3
+precuneus                             7181    5027   10310  2.261 0.403 0.14759 0.03960     19    0.9
+rostralanteriorcingulate              1702    1192    3466  2.708 0.386 0.13102 0.04894     46    0.5
+rostralmiddlefrontal                 10989    7693   13854  2.366 0.396 0.13350 0.07389     29    1.3
+superiorfrontal                      15598   10919   26055  2.696 0.305 0.14008 0.03919     37    0.6
+superiorparietal                      9323    6527   16227  2.154 0.401 0.13951 0.07617     27    1.9
+superiortemporal                      8018    5613   17092  2.562 0.567 0.13538 0.07652     34    1.7
+supramarginal                         6943    4861   14246  2.490 0.580 0.14985 0.03032     14    1.4
+frontalpole                            455     319     927  2.470 0.514 0.12333 0.05444     33    1.4
+temporalpole                           888     622    2769  3.214 0.554 0.16162 0.07661     39    1.6
+transversetemporal                     751     526    1271  2.172 0.377 0.15171 0.04454     38    1.2
+insula                                4976    3484    8764  3.040 0.409 0.13912 0.07474     30    1.4

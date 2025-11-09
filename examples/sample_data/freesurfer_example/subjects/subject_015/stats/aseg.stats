@@ -1,0 +1,36 @@
+# Title Segmentation Statistics
+# generating_program mri_segstats
+# cmdline mri_segstats --seg mri/aseg.mgz --sum stats/aseg.stats
+# sysname  Linux
+# hostname synthetic-host
+# machine  x86_64
+# user     synthetic-user
+#
+# ColHeaders  Index SegId NVoxels Volume_mm3 StructName normMean normStdDev normMin normMax normRange
+  1  1001     9491     9491.0 Left-Lateral-Ventricle                    74.87   6.56  52.81 101.75  48.94
+  2  1002      411      411.5 Left-Inf-Lat-Vent                         68.52   6.58  46.00  90.09  44.09
+  3  1003    17717    17717.5 Left-Cerebellum-White-Matter              56.22   8.37  36.07  77.75  41.68
+  4  1004    51317    51317.0 Left-Cerebellum-Cortex                    42.74  10.11  18.19  70.41  52.22
+  5  1005     7542     7542.7 Left-Thalamus-Proper                      57.84   7.25  30.57  84.92  54.35
+  6  1006     3053     3053.2 Left-Caudate                              76.59   5.64  56.04  98.46  42.42
+  7  1007     5500     5500.4 Left-Putamen                              60.80  12.88  38.52  85.70  47.18
+  8  1008     1756     1756.6 Left-Pallidum                             73.11   5.23  50.67  94.64  43.96
+  9  1009     1401     1401.4 3rd-Ventricle                             58.70   9.04  34.21  88.42  54.21
+ 10  1010     1850     1850.3 4th-Ventricle                             68.25   7.90  46.60  97.47  50.87
+ 11  1011    21538    21538.5 Brain-Stem                                51.15   9.71  21.97  75.02  53.05
+ 12  1012     4231     4231.4 Left-Hippocampus                          72.12   9.27  49.78 102.06  52.28
+ 13  1013     1773     1773.9 Left-Amygdala                             73.74  11.88  50.79 102.87  52.08
+ 14  1014      482      482.7 Left-Accumbens-area                       72.03  14.18  46.00 100.06  54.06
+ 15  1015     4187     4187.5 Left-VentralDC                            47.73  11.68  26.79  72.80  46.01
+ 16  1016     8297     8297.9 Right-Lateral-Ventricle                   56.65  13.33  26.78  79.83  53.05
+ 17  1017      519      519.2 Right-Inf-Lat-Vent                        60.45  14.54  35.67  87.44  51.78
+ 18  1018    17530    17530.7 Right-Cerebellum-White-Matter             54.94  14.02  25.76  84.24  58.48
+ 19  1019    49056    49056.7 Right-Cerebellum-Cortex                   56.01  13.70  32.42  82.02  49.59
+ 20  1020     6006     6006.4 Right-Thalamus-Proper                     42.25   9.12  16.46  66.18  49.72
+ 21  1021     3654     3655.0 Right-Caudate                             60.60  11.86  34.11  84.85  50.74
+ 22  1022     4584     4584.5 Right-Putamen                             45.63  10.13  19.76  70.40  50.64
+ 23  1023     1725     1725.8 Right-Pallidum                            68.87   5.75  39.72  89.07  49.35
+ 24  1024     4751     4751.1 Right-Hippocampus                         58.49   9.13  35.93  78.59  42.67
+ 25  1025     1364     1364.9 Right-Amygdala                            44.38  11.60  21.19  72.05  50.86
+ 26  1026      462      462.1 Right-Accumbens-area                      76.01  10.23  54.86 100.02  45.15
+ 27  1027     3310     3310.1 Right-VentralDC                           47.99  10.06  21.27  77.10  55.84
