@@ -181,10 +181,24 @@ class OutputConfig(BaseModel):
         return v
 
 
+class CSVConfig(BaseModel):
+    """Configuration for direct CSV input."""
+
+    data_path: Path = Field(description="Path to CSV file with ROI/feature data")
+    metadata_path: Optional[Path] = Field(default=None, description="Optional metadata CSV path")
+
+    @field_validator("data_path", "metadata_path", mode="before")
+    @classmethod
+    def convert_paths(cls, v):
+        if v is not None and not isinstance(v, Path):
+            return Path(v)
+        return v
+
+
 class PipelineConfig(BaseModel):
     """Top-level pipeline configuration."""
 
-    type: Literal["animal", "human"]
+    type: Literal["animal", "human", "csv"]
     species: Optional[str] = Field(default=None, description="Species for animal pipeline")
 
 
@@ -194,10 +208,11 @@ class DataPrepConfig(BaseModel):
     pipeline: PipelineConfig
     animal: Optional[AnimalConfig] = None
     human: Optional[FreeSurferConfig] = None
+    csv: Optional[CSVConfig] = None
     standardization: StandardizationConfig = Field(default_factory=StandardizationConfig)
     validation: ValidationConfig = Field(default_factory=ValidationConfig)
 
-    @field_validator("animal", "human", mode="after")
+    @field_validator("animal", "human", "csv", mode="after")
     @classmethod
     def validate_pipeline_config(cls, v, info):
         pipeline_type = info.data.get("pipeline").type if "pipeline" in info.data else None
@@ -207,6 +222,8 @@ class DataPrepConfig(BaseModel):
             raise ValueError("animal config required when pipeline.type is 'animal'")
         if pipeline_type == "human" and field_name == "human" and v is None:
             raise ValueError("human config required when pipeline.type is 'human'")
+        if pipeline_type == "csv" and field_name == "csv" and v is None:
+            raise ValueError("csv config required when pipeline.type is 'csv'")
         return v
 
 

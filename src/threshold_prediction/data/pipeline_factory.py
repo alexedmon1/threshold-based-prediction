@@ -285,6 +285,66 @@ class AnimalPipeline(DataPipeline):
         return True
 
 
+class CSVPipeline(DataPipeline):
+    """Pipeline for direct CSV input (pre-formatted data)."""
+
+    def __init__(self, config: DataPrepConfig):
+        """
+        Initialize CSV data pipeline.
+
+        Args:
+            config: DataPrepConfig with pipeline.type='csv'
+        """
+        super().__init__(config)
+
+        if config.pipeline.type != "csv":
+            raise ValueError(f"Expected pipeline.type='csv', got '{config.pipeline.type}'")
+
+        if config.csv is None:
+            raise ValueError("CSVConfig required for csv pipeline")
+
+        self.csv_config = config.csv
+
+    def prepare_data(self) -> pd.DataFrame:
+        """
+        Load data from CSV file.
+
+        Returns:
+            DataFrame with ROI/feature data
+        """
+        from threshold_prediction.data.standardizer import DataStandardizer
+
+        # Load main data
+        df = DataStandardizer.load_from_csv(
+            csv_path=self.csv_config.data_path,
+            subject_id_column=self.config.standardization.subject_id_column,
+            validate=False,  # We'll validate later
+        )
+
+        # Merge with metadata if provided
+        if self.csv_config.metadata_path is not None:
+            metadata = pd.read_csv(self.csv_config.metadata_path)
+            df = DataStandardizer.merge_with_metadata(
+                imaging_df=df,
+                metadata_df=metadata,
+                subject_id_column=self.config.standardization.subject_id_column,
+            )
+
+        return df
+
+    def validate_data(self, df: pd.DataFrame) -> bool:
+        """Validate CSV data."""
+        from threshold_prediction.data.validation import DataValidator
+
+        validator = DataValidator(self.config.validation)
+        report = validator.validate(df)
+
+        if not report.is_valid:
+            raise ValueError(f"Data validation failed:\n{report}")
+
+        return True
+
+
 class DataPipelineFactory:
     """Factory for creating appropriate data preparation pipeline."""
 
@@ -297,7 +357,7 @@ class DataPipelineFactory:
             config: DataPrepConfig object
 
         Returns:
-            HumanPipeline or AnimalPipeline instance
+            HumanPipeline, AnimalPipeline, or CSVPipeline instance
 
         Raises:
             ValueError: If pipeline type is unknown
@@ -306,10 +366,12 @@ class DataPipelineFactory:
             return HumanPipeline(config)
         elif config.pipeline.type == "animal":
             return AnimalPipeline(config)
+        elif config.pipeline.type == "csv":
+            return CSVPipeline(config)
         else:
             raise ValueError(
                 f"Unknown pipeline type: {config.pipeline.type}. "
-                f"Must be 'human' or 'animal'"
+                f"Must be 'human', 'animal', or 'csv'"
             )
 
     @staticmethod
