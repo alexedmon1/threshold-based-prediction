@@ -1,0 +1,79 @@
+# Configuration for Threshold-Based SVM Analysis
+#
+# This configuration controls the threshold scanning and SVM classification.
+# Use with: threshold-predict analyze --data prepared_data.csv --config analysis_config.yaml
+
+data:
+  input: "prepared_data.csv"
+  subject_id_column: "subject_id"
+
+analysis:
+  # Target variable to create threshold-based groups
+  target_variable: "mn_twa"
+
+  # Threshold range to scan
+  threshold_range: [0.0, 2.0]    # [min, max]
+  threshold_step: 0.1             # Step size
+
+# Model configuration
+model:
+  # PCA parameters
+  pca_variance: 0.90              # Retain 90% of variance
+
+  # Cross-validation method
+  cv_method: "kfold"              # or "loo" (leave-one-out)
+  cv_folds: 10                    # Number of folds (if kfold)
+
+  # SVM parameters
+  svm_kernel: "linear"            # Kernel type
+  class_weight: "balanced"        # Handle imbalanced groups
+
+  # Reproducibility
+  random_state: 42                # Random seed
+
+# Ensemble bagging configuration
+ensemble:
+  # Statistics to combine via bagging
+  # (requires separate CSV files per statistic)
+  statistics:
+    - "median"
+    - "variance"
+    - "skew"
+
+  # Voting method
+  voting: "majority"              # or "weighted"
+
+# Brain regions to use
+regions:
+  # Which regions to include in analysis
+  use_regions: "all"              # or list: ["BasalGanglia", "Cortex"]
+
+  # Regions to explicitly exclude
+  exclude_regions: []
+
+# Output configuration
+output:
+  results_dir: "./results/"
+  save_models: true
+  generate_plots: true
+  export_csv: true
+  export_json: true
+
+# Advanced Usage Examples:
+#
+# 1. Leave-one-out cross-validation:
+#    model:
+#      cv_method: "loo"
+#
+# 2. Specific brain regions:
+#    regions:
+#      use_regions: ["BasalGanglia", "Cortex"]
+#
+# 3. Weighted ensemble voting:
+#    ensemble:
+#      voting: "weighted"
+#
+# 4. Fine threshold scanning:
+#    analysis:
+#      threshold_range: [0.05, 0.15]
+#      threshold_step: 0.01

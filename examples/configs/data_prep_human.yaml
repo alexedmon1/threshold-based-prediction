@@ -1,0 +1,52 @@
+# Configuration for Human Neuroimaging Data (FreeSurfer)
+#
+# This configuration prepares data from FreeSurfer outputs for threshold analysis.
+# Use with: threshold-predict prepare --config data_prep_human.yaml --output human_data.csv
+
+pipeline:
+  type: "human"
+
+human:
+  # Path to FreeSurfer SUBJECTS_DIR
+  subjects_dir: "/path/to/freesurfer/subjects"
+
+  # List of subjects to process
+  # Option 1: Provide list directly
+  subjects_list:
+    - "subject_001"
+    - "subject_002"
+    - "subject_003"
+
+  # Option 2: Provide path to text file (one subject per line)
+  # subjects_list: "subjects.txt"
+
+  # FreeSurfer measures to extract
+  measures:
+    - "volume"        # Subcortical volumes
+    - "thickness"     # Cortical thickness
+    - "area"          # Surface area
+
+  # FreeSurfer atlases to use
+  atlases:
+    - "aseg"          # Subcortical segmentation
+    - "aparc"         # Cortical parcellation (Desikan-Killiany)
+
+standardization:
+  # Optional: Path to metadata CSV with subject demographics/exposure data
+  metadata: "subject_metadata.csv"
+
+  # Column name for subject IDs (must match between FreeSurfer and metadata)
+  subject_id_column: "subject_id"
+
+  # Target variables for threshold analysis
+  target_variables:
+    - "mn_twa"                    # Manganese time-weighted average
+    - "excess_mn"                 # Excess manganese exposure
+    - "air_mn"                    # Air manganese concentration
+    - "total_welding_years"       # Duration of exposure
+
+validation:
+  check_missing: true
+  missing_threshold: 0.10         # Fail if >10% missing data
+  check_outliers: true
+  outlier_std: 3.0                # Flag values >3 SD from mean

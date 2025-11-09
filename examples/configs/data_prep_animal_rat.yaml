@@ -1,0 +1,61 @@
+# Configuration for Animal Neuroimaging Data (Rat - SIGMA Atlas)
+#
+# This configuration extracts ROI statistics from rat brain images using
+# the SIGMA atlas (Scalable multimodal atlas for rat brain).
+# Use with: threshold-predict prepare --config data_prep_animal_rat.yaml --output rat_data.csv
+
+pipeline:
+  type: "animal"
+  species: "rat"
+
+animal:
+  atlas:
+    # Option 1: Use pre-configured atlas
+    name: "sigma"
+
+    # Option 2: Use custom atlas
+    # type: "labelmap"
+    # path: "atlases/custom_rat_atlas.nii.gz"
+    # labels_csv: "atlases/custom_labels.csv"
+
+  images:
+    # Glob patterns for image files
+    # {subject_id} will be extracted from directory structure
+    r1_pattern: "data/rats/*/R1_registered.nii.gz"
+    r2star_pattern: "data/rats/*/R2star_registered.nii.gz"
+
+    # Alternative: Single modality
+    # pattern: "data/rats/*/T1.nii.gz"
+
+  # Statistical measures to extract from each ROI
+  statistics:
+    - "mean"
+    - "median"
+    - "std"
+    - "variance"
+    - "skew"
+    - "percentile_10"
+    - "percentile_90"
+
+  preprocessing:
+    # Set to true if images need registration to atlas
+    registration_required: false
+
+standardization:
+  # Path to metadata CSV with exposure/treatment information
+  metadata: "rat_metadata.csv"
+
+  # Column name for subject/animal IDs
+  subject_id_column: "RatID"
+
+  # Target variables for threshold analysis
+  target_variables:
+    - "mn_dose"               # Manganese dose (mg/kg)
+    - "treatment_group"       # Control, low, medium, high
+    - "exposure_duration"     # Days of exposure
+
+validation:
+  check_missing: true
+  missing_threshold: 0.10
+  check_outliers: true
+  outlier_std: 3.0

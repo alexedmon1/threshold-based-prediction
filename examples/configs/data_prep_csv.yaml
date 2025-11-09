@@ -1,0 +1,57 @@
+# Configuration for Direct CSV Input
+#
+# Use this when you have pre-formatted ROI data from:
+# - Manual measurements
+# - Other processing pipelines
+# - Partial brain coverage studies
+# - Pre-processed data from other tools
+#
+# See docs/csv_data_format.md for required format
+# Use with: threshold-predict prepare --config data_prep_csv.yaml --output analysis_data.csv
+
+pipeline:
+  type: "csv"
+
+csv:
+  # Path to CSV file with ROI/feature data
+  data_path: "roi_measurements.csv"
+
+  # Optional: Path to separate metadata CSV
+  # If null, all data should be in data_path
+  metadata_path: "subject_metadata.csv"
+
+standardization:
+  # Column name for subject IDs
+  subject_id_column: "subject_id"
+
+  # Target variables for threshold analysis
+  target_variables:
+    - "dose_mg_kg"
+    - "exposure_level"
+    - "treatment_group"
+
+  # Output path
+  output: "prepared_data.csv"
+
+  # Run validation
+  validate: true
+
+validation:
+  check_missing: true
+  missing_threshold: 0.10
+  check_outliers: true
+  outlier_std: 3.0
+
+# Example CSV format (roi_measurements.csv):
+#
+# subject_id,striatum_left,striatum_right,hippocampus,cortex_volume
+# rat_001,12.5,12.8,45.2,850.3
+# rat_002,11.2,11.5,43.1,832.1
+# rat_003,10.8,11.0,41.5,815.7
+#
+# Example metadata (subject_metadata.csv):
+#
+# subject_id,age_days,dose_mg_kg,treatment_group
+# rat_001,90,0.0,control
+# rat_002,95,5.0,low
+# rat_003,92,10.0,medium
