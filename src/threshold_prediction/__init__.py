@@ -13,7 +13,7 @@ Main components:
 """
 
 __version__ = "0.1.0"
-__author__ = "Derek Edmonds"
+__author__ = "Alex Edmondson"
 
 # Core imports will be added as modules are implemented
 # from threshold_prediction.models.threshold_analyzer import ThresholdAnalyzer

@@ -305,7 +305,7 @@ If you use this package in your research, please cite:
 
 ```bibtex
 @software{neurothreshold,
-  author = {Edmonds, Derek},
+  author = {Edmondson, Alex},
   title = {NeuroThreshold: Neuroimaging-Based Threshold Prediction},
   year = {2024},
   url = {https://github.com/alexedmon1/neurothreshold}

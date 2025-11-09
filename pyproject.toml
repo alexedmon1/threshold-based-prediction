@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [
-    {name = "Derek Edmonds", email = "edmondsd@example.com"}
+    {name = "Alex Edmondson", email = "alex.edmondson@cchmc.org"}
 ]
 keywords = ["neuroimaging", "toxicology", "machine-learning", "svm", "freesurfer", "mri"]
 classifiers = [
