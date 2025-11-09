@@ -1,6 +1,6 @@
 # NeuroThreshold
 
-A Python package for identifying toxicological thresholds using neuroimaging biomarkers and machine learning.
+A Python toolkit for identifying critical thresholds in continuous variables using neuroimaging biomarkers and machine learning. Supports both human (FreeSurfer) and animal (atlas-based) brain MRI analysis.
 
 ## Overview
 
@@ -334,24 +334,39 @@ For questions, issues, or feature requests:
 
 ## Development Status
 
-**Current Version**: 0.1.0 (Alpha)
+**Current Version**: 0.1.0 (Beta)
 
-This package is under active development. The data preparation pipeline is complete and tested. Core analysis components are being finalized.
+This package is feature-complete and ready for use. All core functionality has been implemented and tested with synthetic datasets.
 
-### Roadmap
+### Completed Features ✅
 
 - [x] Data preparation infrastructure
 - [x] Multi-species atlas support (human, rat, mouse, NHP)
 - [x] CSV direct input pipeline
-- [x] Configuration system
-- [ ] Core threshold analyzer
-- [ ] Ensemble bagging methods
-- [ ] Evaluation metrics and visualization
-- [ ] Command-line interface
-- [ ] Example notebooks and tutorials
-- [ ] Comprehensive test suite
-- [ ] Complete documentation
+- [x] Configuration system (YAML-based)
+- [x] Core threshold analyzer (PCA + Linear SVM)
+- [x] Ensemble bagging methods
+- [x] Evaluation metrics and visualization
+- [x] HTML report generation with embedded figures
+- [x] Inflection point detection
+- [x] Command-line interface
+- [x] Python API
+- [x] Example notebooks and tutorials
+- [x] Working synthetic datasets (FreeSurfer + SIGMA)
+- [x] Comprehensive documentation
+
+### Future Roadmap 🚀
+
+- [ ] Unit test suite (pytest)
+- [ ] Integration tests with real data
+- [ ] Additional classification methods (Random Forest, XGBoost)
+- [ ] Multi-threshold joint optimization
+- [ ] Advanced feature selection methods
+- [ ] Interactive web dashboard
+- [ ] Docker containerization
 - [ ] PyPI package release
+- [ ] Documentation website (ReadTheDocs)
+- [ ] Benchmark comparisons with traditional dose-response
 
 ---
 
