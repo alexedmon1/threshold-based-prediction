@@ -50,7 +50,7 @@ standardization:
 
   # Target variables for threshold analysis
   target_variables:
-    - "mn_dose"               # Manganese dose (mg/kg)
+    - "exposure_dose"         # Exposure dose (arbitrary units)
     - "treatment_group"       # Control, low, medium, high
     - "exposure_duration"     # Days of exposure
 

@@ -69,8 +69,8 @@ This package uses a novel approach:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/threshold-based-prediction.git
-cd threshold-based-prediction
+git clone https://github.com/alexedmon1/neurothreshold.git
+cd neurothreshold
 
 # Create virtual environment and install
 uv venv
@@ -109,7 +109,7 @@ data = pipeline.run(output_path="human_data.csv")
 analyzer = ThresholdAnalyzer.from_config_file("analysis_config.yaml")
 analyzer.load_data("human_data.csv")
 results = analyzer.scan_thresholds(
-    target_variable="mn_twa",
+    target_variable="exposure_dose",
     threshold_range=(0.0, 2.0),
     threshold_step=0.1
 )
@@ -143,13 +143,13 @@ standardization:
   metadata: "rat_metadata.csv"
   subject_id_column: "RatID"
   target_variables:
-    - "mn_dose"
+    - "exposure_dose"
 ```
 
 ```bash
 # Run from command line
 neurothreshold prepare --config config_animal.yaml --output rat_data.csv
-neurothreshold analyze --data rat_data.csv --target mn_dose --config analysis_config.yaml
+neurothreshold analyze --data rat_data.csv --target exposure_dose --config analysis_config.yaml
 ```
 
 ### Example 3: Direct CSV Input
@@ -197,7 +197,7 @@ See [CSV Data Format Guide](docs/csv_data_format.md) for detailed formatting ins
 ## Project Structure
 
 ```
-threshold-based-prediction/
+neurothreshold/
 ├── src/threshold_prediction/      # Main package
 │   ├── data/                      # Data preparation
 │   │   ├── human/                 # FreeSurfer parsers
@@ -304,11 +304,11 @@ Contributions are welcome! Areas for development:
 If you use this package in your research, please cite:
 
 ```bibtex
-@software{threshold_prediction,
+@software{neurothreshold,
   author = {Edmonds, Derek},
-  title = {Threshold-Based Prediction of Toxicological Exposure},
+  title = {NeuroThreshold: Neuroimaging-Based Threshold Prediction},
   year = {2024},
-  url = {https://github.com/yourusername/threshold-based-prediction}
+  url = {https://github.com/alexedmon1/neurothreshold}
 }
 ```
 

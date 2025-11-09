@@ -9,7 +9,7 @@ data:
 
 analysis:
   # Target variable to create threshold-based groups
-  target_variable: "mn_twa"
+  target_variable: "exposure_dose"
 
   # Threshold range to scan
   threshold_range: [0.0, 2.0]    # [min, max]

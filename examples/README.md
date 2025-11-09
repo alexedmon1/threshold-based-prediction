@@ -28,7 +28,7 @@ neurothreshold prepare \
 # Run threshold analysis
 neurothreshold analyze \
     --data human_data.csv \
-    --target mn_twa \
+    --target exposure_dose \
     --threshold-min 0 \
     --threshold-max 2.0 \
     --threshold-step 0.1 \
@@ -46,7 +46,7 @@ neurothreshold prepare \
 # Run analysis
 neurothreshold analyze \
     --data rat_data.csv \
-    --target mn_dose \
+    --target exposure_dose \
     --threshold-min 0 \
     --threshold-max 50 \
     --threshold-step 5 \
@@ -121,7 +121,7 @@ data = pipeline.run(output_path="human_data.csv")
 analyzer = ThresholdAnalyzer.from_config_file("examples/configs/analysis_config.yaml")
 analyzer.load_data("human_data.csv")
 results = analyzer.scan_thresholds(
-    target_variable="mn_twa",
+    target_variable="exposure_dose",
     threshold_range=(0.0, 2.0),
     threshold_step=0.1
 )
@@ -132,7 +132,7 @@ from threshold_prediction.evaluation import ResultsEvaluator, HTMLReportGenerato
 evaluator = ResultsEvaluator(analyzer.results)
 visualizer = ResultsVisualizer(analyzer.results)
 report_gen = HTMLReportGenerator(evaluator, visualizer)
-report_gen.generate_html_report("report.html", target_variable="mn_twa")
+report_gen.generate_html_report("report.html", target_variable="exposure_dose")
 ```
 
 ## Customizing Configurations

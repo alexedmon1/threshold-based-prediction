@@ -40,10 +40,9 @@ standardization:
 
   # Target variables for threshold analysis
   target_variables:
-    - "mn_twa"                    # Manganese time-weighted average
-    - "excess_mn"                 # Excess manganese exposure
-    - "air_mn"                    # Air manganese concentration
-    - "total_welding_years"       # Duration of exposure
+    - "exposure_dose"             # Exposure dose (arbitrary units)
+    - "exposure_group"            # Exposure group classification
+    - "years_exposure"            # Duration of exposure (years)
 
 validation:
   check_missing: true
